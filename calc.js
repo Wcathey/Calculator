@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
 let number = document.getElementsByClassName('number');
 //all operator elements
 let operatorList = document.getElementsByClassName('operator');
-
+let percent = document.getElementById('percent')
 let clear = document.getElementById('clear');
 let equals = document.getElementById('equals');
 let undo = document.getElementById('undo');
@@ -40,14 +40,11 @@ const trackOperatorInput = () => {
             if(value.length) {
                 let num = makeNumber(value);
                 //check for percentage
-                if(e.target.innerText === '%') {
-                    let percent = (num / 100);
-                    runningTotal = percent;
-                }
 
-                else {
+
+
                     runningTotal = num;
-                }
+
 
                 value = '';
             };
@@ -65,6 +62,10 @@ const makeNumber = (strNum) => {
     return Number(strNum);
 }
 
+percent.addEventListener('click', (e) => {
+value = (makeNumber(value) / 100).toString();
+
+})
 //check for equals to log the total
 equals.addEventListener('click', (e) => {
     //total out addition
@@ -106,7 +107,7 @@ clear.addEventListener('click', (e) => {
 });
 
 undo.addEventListener('click', (e) => {
-    
+
     if(currentOperator !== '=') {
         let arr = value.split('')
         arr.pop();
